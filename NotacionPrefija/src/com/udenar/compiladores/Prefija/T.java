@@ -31,6 +31,8 @@ public class T extends Elemento{
       this.CONJUNTO_DE_TERMINALES.add("*");
       this.CONJUNTO_DE_TERMINALES.add("/");
       this.CONJUNTO_DE_TERMINALES.add("^");
+      this.CONJUNTO_DE_TERMINALES.add("(");
+      this.CONJUNTO_DE_TERMINALES.add(")");
     }
 
     public T(String nombre) {

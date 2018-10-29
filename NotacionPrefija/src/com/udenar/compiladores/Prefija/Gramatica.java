@@ -37,9 +37,18 @@ public class Gramatica {
         return this.producciones.get(i);
     }
     
+    public int numeroProducciones(){
+        return this.producciones.size();
+    }
+    
     @Override
     public String toString() {
-        return "Gramatica:"  + nombre + ".\n Producciones=" + producciones ;
+        String prods = "";
+        for(Map.Entry<Integer,Produccion> entrada : producciones.entrySet() ){
+            prods += entrada.getKey()+ ".- "+entrada.getValue()+"\n";
+        }
+        
+        return "Gramatica:"  + nombre + ".\n Producciones\n" + prods;
     }
     
     
