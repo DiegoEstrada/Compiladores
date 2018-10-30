@@ -36,7 +36,7 @@ public  class  SimboloAccion extends Elemento implements Operaciones{
 
     @Override
     public String toString() {
-        return "" + super.getNombre();
+        return "{" + super.getNombre()+"}";
     }
     
     
