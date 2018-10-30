@@ -44,8 +44,21 @@ public class Pila {
     }
     public void remplaceInversa(ArrayList<Contenido> objs){
         this.pila.pop();
-        Collections.reverse(objs);
-        for(Contenido o : objs){
+        
+        ArrayList<Contenido> copia =new ArrayList();
+        int j = objs.size()-1;
+        
+        for(int i = objs.size()-1; i>=0; i--){
+            copia.add(objs.get(i));
+        }
+        
+        
+        //Collections.reverse(objs);
+        /*
+            Cuidado con este metodo, lo que hace es modificar todo el contendio 
+            que se le describa aun cunado sea final 
+        */
+        for(Contenido o : copia){
             this.push(o);
         }
     }

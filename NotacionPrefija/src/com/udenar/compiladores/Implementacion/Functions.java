@@ -2,6 +2,7 @@ package com.udenar.compiladores.Implementacion;
 
 import com.udenar.compiladores.Prefija.Contenido;
 import com.udenar.compiladores.Prefija.Gramatica;
+import com.udenar.compiladores.Prefija.NT;
 import com.udenar.compiladores.Prefija.Produccion;
 import java.util.ArrayList;
 
@@ -11,18 +12,19 @@ import java.util.ArrayList;
  */
 public  class Functions {
     
-    private static Gramatica gramatica;
+ 
     private Pila pila;
     
-    public Functions(Gramatica g, Pila p){
-          this.gramatica = g;
-        this.pila = p;
+    public Functions( ){
+        this.pila = new Pila();
+        this.pila.push(new Contenido(new NT("VACIA")));
+        this.pila.push(new Contenido(new NT("S")));
     }
     
-    public Pila funcion(int i){
-        Produccion p = gramatica.getProduccion(i);
+    public Pila funcion(Produccion p){
+        
         ArrayList<Contenido> c = p.getContenido();
-        System.out.println("\t Produccion "+i+" CONTENIDO "+c);
+        System.out.println("\t Produccion "+" CONTENIDO "+c);
         /* 
             Revisar que el primer elemento de la produccion no se Terminal
             Y si es terminal, borrarlo para realizar el remplace
@@ -43,6 +45,9 @@ public  class Functions {
         return this.pila;
     }
    
+    public Contenido top(){
+        return this.pila.top();
+    }
     
     public  Pila pop(){
         pila.pop();
