@@ -27,9 +27,7 @@ public class GramaticaInfija extends Gramatica {
         //          Produccion 1         //
         ArrayList<Contenido> c1 = new ArrayList();
         c1.add(new Contenido(new NT("E")));
-        c1.get(0).getNoTerminal().agregarAtributo("S", 0);
         c1.add(new Contenido(new SimboloAccion("Respuesta")));
-        c1.get(1).getSimboloAccion().agregarAtributo("I", 0);
         
         p.add(new Produccion(new NT("S"), c1));
         //c.clear();
@@ -66,7 +64,7 @@ public class GramaticaInfija extends Gramatica {
         
         //          Produccion 5         //
         ArrayList<Contenido> c5 = new ArrayList();
-        c5.add(new Contenido(new NT("F")));
+        c5.add(new Contenido(new NT("P")));
         c5.add(new Contenido(new NT("T-L")));
        
         p.add(new Produccion(new NT("T"), c5));
@@ -77,7 +75,7 @@ public class GramaticaInfija extends Gramatica {
         
         ArrayList<Contenido> c6 = new ArrayList();
         c6.add(new Contenido(new T("*")));
-        c6.add(new Contenido(new NT("F")));
+        c6.add(new Contenido(new NT("P")));
         c6.add(new Contenido(new SimboloAccion("Mult")));
         c6.add(new Contenido(new NT("T-L")));
         
@@ -115,12 +113,13 @@ public class GramaticaInfija extends Gramatica {
         */
         
         
-        //          Produccion 11         //
+        //          Produccion 8         //
         ArrayList<Contenido> c111 = new ArrayList();
         c111.add(new Contenido(new T("0")));
         p.add(new Produccion(new NT("F"), c111));
         //c.clear;
         
+        //          Produccion 9        //        
         ArrayList<Contenido> c112 = new ArrayList();
         c112.add(new Contenido(new T("1")));
         p.add(new Produccion(new NT("F"), c112));
@@ -175,16 +174,60 @@ public class GramaticaInfija extends Gramatica {
         //c.clear();
         //                //            //
         
-        //          Produccion 10         //
+        //          Produccion 18         //
         ArrayList<Contenido> c10 = new ArrayList();
         c10.add(new Contenido(new T("(")));
         c10.add(new Contenido(new NT("E")));
         c10.add(new Contenido(new T(")")));
 
         p.add(new Produccion(new NT("F"), c10));
-        //c10.clear();
-        //                //            //
         
+
+        //          Produccion 19         //
+        ArrayList<Contenido> c11 = new ArrayList();
+        c11.add(new Contenido(new T("-")));
+        c11.add(new Contenido(new NT("T")));
+        c11.add(new Contenido(new SimboloAccion("Resta")));   
+       	c11.add(new Contenido(new NT("E-L")));  
+
+        p.add(new Produccion(new NT("E-L"), c11));
+
+
+        //          Produccion 20         //
+        ArrayList<Contenido> c12 = new ArrayList();
+        c12.add(new Contenido(new T("/")));
+        c12.add(new Contenido(new NT("P")));        
+        c12.add(new Contenido(new SimboloAccion("Div")));        	
+        c12.add(new Contenido(new NT("T-L")));
+
+        p.add(new Produccion(new NT("T-L"), c12));
+
+        
+        //          Produccion 21         //
+        ArrayList<Contenido> c21 = new ArrayList();
+        c21.add(new Contenido(new NT("F")));
+        c21.add(new Contenido(new NT("P-L")));
+ 
+
+        p.add(new Produccion(new NT("P"), c21));
+
+
+        //          Produccion 22         //
+        ArrayList<Contenido> c22 = new ArrayList();
+        c22.add(new Contenido(new T("^")));
+        c22.add(new Contenido(new NT("F")));
+        c22.add(new Contenido(new SimboloAccion("Exponente")));
+        c22.add(new Contenido(new NT("P-L")));
+
+        p.add(new Produccion(new NT("P-L"), c22));
+
+
+
+        //          Produccion 23         //
+        ArrayList<Contenido> c23 = new ArrayList();
+        c23.add(new Contenido());
+       
+        p.add(new Produccion(new NT("P-L"), c23));      
         
         // Creando y Agregando las producciones a la gramatica //
         
@@ -197,7 +240,6 @@ public class GramaticaInfija extends Gramatica {
         
         super.setProducciones(producciones);
     }
-
     
 
     @Override

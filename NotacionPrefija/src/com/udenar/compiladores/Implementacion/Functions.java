@@ -34,7 +34,7 @@ public  class Functions {
         Produccion p = this.g.getProduccion(numeroProduccion);
         ArrayList<Contenido> c = p.getContenido();
         System.out.println("Aplicando produccion "+numeroProduccion+
-                " =  "+c);
+                " =  "+p);
         /* 
             Revisar que el primer elemento de la produccion no se Terminal
             Y si es terminal, borrarlo para realizar el remplace
@@ -67,8 +67,26 @@ public  class Functions {
     
     public String r(String cadena){
         String resultado = "";
+        String copia = cadena.substring(0,cadena.length()-1);
+        String copiaE = " ";
+        String copiaF = " ";
         try{
-            resultado = engine.eval(cadena.substring(0, cadena.length()-1)).toString();
+            if(cadena.contains("^"))
+            {
+                while(copia.contains("^")){
+                    
+                    int pos = copia.indexOf("^");
+                    System.out.println(" pos "+pos);
+                    char base = copia.charAt(pos-1);
+                    char exponente = copia.charAt(pos+1);
+                    copiaE = copia.substring(pos+2, copia.length());
+                    copia = copia.substring(pos, pos+1);
+                    copia = copia.replace("^", "Math.pow("+base+","+exponente+")");
+                    System.out.println(" "+copia+copiaE);
+                }
+                resultado = engine.eval(copia+copiaE).toString();
+            }else
+                resultado = engine.eval(cadena.substring(0, cadena.length()-1)).toString();
             }catch(ScriptException e){e.printStackTrace();}
         return resultado;
     }

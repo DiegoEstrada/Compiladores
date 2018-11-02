@@ -9,7 +9,7 @@ import com.udenar.compiladores.Prefija.Operaciones;
  * @author Diego EG
  */
 public class MainGramaticaInfija {
-    private static final String CADENA_PRUEBA = "4*6*2F";
+    private static final String CADENA_PRUEBA = "(8^2)F";
     private static boolean errorEncontrado = false;
     private static Integer op1, op2, res;
     
@@ -154,6 +154,7 @@ public class MainGramaticaInfija {
                                 }
                                 //indiceCP++;
                                     break;
+                                  
                             case "<F>":
                                 switch(CADENA_PRUEBA.charAt(indiceCP)){
                                     case '0' :
@@ -322,6 +323,10 @@ public class MainGramaticaInfija {
                                          f.funcion(3);
                                         indiceCP++;
                                             break;
+                                    case '-' :
+                                         f.funcion(19);
+                                         indiceCP++;                                         
+                                            break;
                                     case ')':
                                          f.pop();
                                             break;
@@ -335,13 +340,21 @@ public class MainGramaticaInfija {
                                             break;
                                 }
                                     break;
+       
                             case "<T-L>":
                                 switch(CADENA_PRUEBA.charAt(indiceCP)){
                                     case '+' :
                                          f.pop();
                                             break;
+                                    case '-' :
+                                         f.pop();
+                                            break;
                                     case '*':
                                          f.funcion(6);
+                                        indiceCP++;
+                                            break;
+                                    case '/':
+                                         f.funcion(20);
                                         indiceCP++;
                                             break;
                                     case ')':
@@ -356,8 +369,81 @@ public class MainGramaticaInfija {
                                             indiceCP++;
                                             break;
                                 }
+                                    break;       
+                            case "<P-L>":
+                                switch(CADENA_PRUEBA.charAt(indiceCP)){
+                                    case '+':
+                                        f.pop();
+                                        break;
+                                     case '-':
+                                        f.pop();
+                                        break;
+                                    case '*':
+                                        f.pop();
+                                        break;
+                                    case '/':
+                                        f.pop();
+                                        break;
+                                    case ')':
+                                        f.pop();
+                                        break;
+                                    case '^':
+                                        f.funcion(22);
+                                        indiceCP++;
+                                        break;
+                                    case 'F':
+                                        f.pop();
+                                        break;  
+                                        
+                                    default:
+                                            errorEncontrado = true;
+                                            System.out.println("RECHACE "); //Lanzar excepcion
+                                            indiceCP++;
+                                            break;                                    
+                                }
+                                break;
+                            case "<P>":
+                                switch(CADENA_PRUEBA.charAt(indiceCP)){
+                                    case '(':
+                                        f.funcion(21);
+                                        break;                                        
+                                    case '0' :
+                                         f.funcion(21);
+                                            break;
+                                    case '1':
+                                         f.funcion(21);
+                                            break;
+                                    case '2':
+                                         f.funcion(21);
+                                            break;
+                                    case '3':
+                                         f.funcion(21);
+                                            break;
+                                    case '4':
+                                         f.funcion(21);
+                                            break;
+                                    case '5':
+                                         f.funcion(21);
+                                            break;
+                                    case '6':
+                                         f.funcion(21);
+                                            break;        
+                                    case '7':
+                                         f.funcion(21);
+                                            break;
+                                    case '8':
+                                         f.funcion(21);;
+                                            break;
+                                    case '9':
+                                         f.funcion(21);
+                                            break;   
+                                    default:
+                                            errorEncontrado = true;
+                                            System.out.println("RECHACE "); //Lanzar excepcion
+                                            indiceCP++;
+                                            break;
+                                }
                                     break;
-
                             case ")":
                                 switch(CADENA_PRUEBA.charAt(indiceCP)){
                                     case ')' :
@@ -395,14 +481,45 @@ public class MainGramaticaInfija {
                                 op2 = res;
                                 f.pop();
                                     break;
+                            case "{Div}":
+                                if(op1 == null){
+                                    res = new Integer(Operaciones.multiplicacion(res, op2));
+                                }else
+                                res = new Integer(Operaciones.division(op1, op2));
+                                op1 = null;
+                                op2 = res;
+                                f.pop();
+                                    break;
+                            case "{Resta}":
+                                
+                                if(op1 == null){
+                                    res = new Integer(Operaciones.multiplicacion(res, op2));
+                                }else
+                                res = new Integer(Operaciones.resta(op1, op2));
+                                op1 = null;
+                                op2 = res;
+                                f.pop();
+                                    break;
+                            case "{Exponente}":
+                                
+                                if(op1 == null){
+                                    res = new Integer(Operaciones.multiplicacion(res, op2));
+                                }else
+                                res = new Integer(Operaciones.exponente(op1, op2));
+                                op1 = null;
+                                op2 = res;
+                                f.pop();
+                                    break;
+                                    
                             case "{Respuesta}":
                                 Operaciones.respuesta(res);
                                 f.pop();
                                     break;
+                                    
                             case "<VACIA>":
                                 if(CADENA_PRUEBA.charAt(indiceCP)=='F'){
                                     System.out.println("ACEPTE");
-                                    System.out.println("Resultado = "+f.r(CADENA_PRUEBA));
+                                    //System.out.println("Resultado = "+f.r(CADENA_PRUEBA));
                                    indiceCP++;
                                 }  
                                 else
