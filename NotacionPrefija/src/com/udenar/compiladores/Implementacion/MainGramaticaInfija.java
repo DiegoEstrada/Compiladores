@@ -1,9 +1,7 @@
 package com.udenar.compiladores.Implementacion;
 
 import com.udenar.compiladores.Prefija.Gramatica;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptEngine;
-import javax.script.ScriptException;
+import com.udenar.compiladores.Prefija.Operaciones;
 
 
 /**
@@ -11,8 +9,9 @@ import javax.script.ScriptException;
  * @author Diego EG
  */
 public class MainGramaticaInfija {
-    private static final String CADENA_PRUEBA = "(8*8)F";
+    private static final String CADENA_PRUEBA = "4*6*2F";
     private static boolean errorEncontrado = false;
+    private static Integer op1, op2, res;
     
     public static void main(String[] args) {
         
@@ -159,33 +158,103 @@ public class MainGramaticaInfija {
                                 switch(CADENA_PRUEBA.charAt(indiceCP)){
                                     case '0' :
                                          f.pop();
+                                         if(op1 == null){
+                                             op1 = new Integer(0);
+                                         }else{
+                                             if(op2 == null){
+                                                 op2 = new Integer(0);
+                                             }
+                                         }
                                             break;
                                     case '1':
                                          f.pop();
+                                         if(op1 == null){
+                                             op1 = new Integer(1);
+                                         }else{
+                                             if(op2 == null){
+                                                 op2 = new Integer(1);
+                                             }
+                                         }
                                             break;
                                     case '2':
                                          f.pop();
+                                         if(op1 == null){
+                                             op1 = new Integer(2);
+                                         }else{
+                                             if(op2 == null){
+                                                 op2 = new Integer(2);
+                                             }
+                                         }
                                             break;
                                     case '3':
                                          f.pop();
+                                         if(op1 == null){
+                                             op1 = new Integer(3);
+                                         }else{
+                                             if(op2 == null){
+                                                 op2 = new Integer(3);
+                                             }
+                                         }
                                             break;
                                     case '4':
-                                         f.pop();
+                                        f.pop();
+                                        if(op1 == null){
+                                             op1 = new Integer(4);
+                                         }else{
+                                             if(op2 == null){
+                                                 op2 = new Integer(4);
+                                             }
+                                         }
                                             break;
                                     case '5':
-                                         f.pop();
+                                        f.pop();
+                                        if(op1 == null){
+                                             op1 = new Integer(5);
+                                         }else{
+                                             if(op2 == null){
+                                                 op2 = new Integer(5);
+                                             }
+                                         }
                                             break;
                                     case '6':
                                          f.pop();
+                                         if(op1 == null){
+                                             op1 = new Integer(6);
+                                         }else{
+                                             if(op2 == null){
+                                                 op2 = new Integer(6);
+                                             }
+                                         }
                                             break;        
                                     case '7':
                                          f.pop();
+                                         if(op1 == null){
+                                             op1 = new Integer(7);
+                                         }else{
+                                             if(op2 == null){
+                                                 op2 = new Integer(7);
+                                             }
+                                         }
                                             break;
                                     case '8':
                                          f.pop();
+                                         if(op1 == null){
+                                             op1 = new Integer(8);
+                                         }else{
+                                             if(op2 == null){
+                                                 op2 = new Integer(8);
+                                             }
+                                         }
                                             break;
                                     case '9':
                                          f.pop();
+                                         if(op1 == null){
+                                             op1 = new Integer(9);
+                                         }else{
+                                             if(op2 == null){
+                                                 op2 = new Integer(9);
+                                             }
+                                         }
                                             break;
                                     case '(':
                                          f.funcion(18);
@@ -307,12 +376,27 @@ public class MainGramaticaInfija {
                                     break;
 
                             case "{Suma}":
+                                
+                                if(op1 == null){
+                                    res = new Integer(Operaciones.suma(res, op2));
+                                }else
+                                res = new Integer(Operaciones.suma(op1, op2));
+                                op1 = null;
+                                op2 = res;
                                 f.pop();
                                     break;
                             case "{Mult}":
+                                
+                                if(op1 == null){
+                                    res = new Integer(Operaciones.multiplicacion(res, op2));
+                                }else
+                                res = new Integer(Operaciones.multiplicacion(op1, op2));
+                                op1 = null;
+                                op2 = res;
                                 f.pop();
                                     break;
                             case "{Respuesta}":
+                                Operaciones.respuesta(res);
                                 f.pop();
                                     break;
                             case "<VACIA>":
