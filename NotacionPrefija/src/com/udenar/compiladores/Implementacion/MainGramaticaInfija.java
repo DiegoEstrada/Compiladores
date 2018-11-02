@@ -1,6 +1,9 @@
 package com.udenar.compiladores.Implementacion;
 
 import com.udenar.compiladores.Prefija.Gramatica;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptEngine;
+import javax.script.ScriptException;
 
 
 /**
@@ -8,9 +11,8 @@ import com.udenar.compiladores.Prefija.Gramatica;
  * @author Diego EG
  */
 public class MainGramaticaInfija {
-    private static final String CADENA_PRUEBA = "((9*9+1*7))F";
+    private static final String CADENA_PRUEBA = "(8*8)F";
     private static boolean errorEncontrado = false;
-    private String n1="",n2="";
     
     public static void main(String[] args) {
         
@@ -27,9 +29,7 @@ public class MainGramaticaInfija {
         
         for ( indiceCP = 0; indiceCP < CADENA_PRUEBA.length();) {
           
-            if(errorEncontrado){
-                break;
-            }
+            
             
             //System.out.println(""+pila);
             String topePila = f.top().toString();
@@ -37,6 +37,7 @@ public class MainGramaticaInfija {
             
            // System.out.println("GRAMATICA ");
 
+           if(!errorEncontrado){
             switch(topePila){
               
                             case "<S>":
@@ -317,6 +318,7 @@ public class MainGramaticaInfija {
                             case "<VACIA>":
                                 if(CADENA_PRUEBA.charAt(indiceCP)=='F'){
                                     System.out.println("ACEPTE");
+                                    System.out.println("Resultado = "+f.r(CADENA_PRUEBA));
                                    indiceCP++;
                                 }  
                                 else
@@ -329,7 +331,9 @@ public class MainGramaticaInfija {
                                     System.out.println("RECHACE "); //Lanzar excepcion
                                     indiceCP++;
                                     break;
-            }   
+            }
+           }else
+               break;
         }
     }
 }

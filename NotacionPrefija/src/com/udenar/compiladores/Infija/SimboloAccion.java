@@ -27,6 +27,11 @@ public  class  SimboloAccion extends Elemento implements Operaciones{
         this.getAtributos().put(nombre, valor);
     }
     
+    public void editarAtributo(String nombre, int valor){
+       if(this.atributos.replace(nombre, valor) == null)
+            System.out.println("No se pudo modificar el valor del atributo "+nombre);
+    }
+    
     /*
         El sigueinte metodo esta pensado para recibir un conjunto de parameteos
         en los simbolos de acion, por si se llegan a utilizar en un futuro

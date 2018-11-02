@@ -28,6 +28,11 @@ public class NT extends Elemento {
     public void agregarAtributo(String nombre, int valor){
         atributos.put(nombre, valor);
     }
+    
+    public void editarAtributo(String nombre, int valor){
+       if(this.atributos.replace(nombre, valor) == null)
+            System.out.println("No se pudo modificar el valor del atributo "+nombre);
+    }
 
     @Override
     public String toString() {

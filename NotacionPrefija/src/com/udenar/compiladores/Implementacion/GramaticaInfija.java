@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  *
  * @author Diego EG
@@ -26,7 +27,9 @@ public class GramaticaInfija extends Gramatica {
         //          Produccion 1         //
         ArrayList<Contenido> c1 = new ArrayList();
         c1.add(new Contenido(new NT("E")));
+        c1.get(0).getNoTerminal().agregarAtributo("S", 0);
         c1.add(new Contenido(new SimboloAccion("Respuesta")));
+        c1.get(1).getSimboloAccion().agregarAtributo("I", 0);
         
         p.add(new Produccion(new NT("S"), c1));
         //c.clear();
@@ -76,6 +79,7 @@ public class GramaticaInfija extends Gramatica {
         c6.add(new Contenido(new T("*")));
         c6.add(new Contenido(new NT("F")));
         c6.add(new Contenido(new SimboloAccion("Mult")));
+        c6.add(new Contenido(new NT("T-L")));
         
         p.add(new Produccion(new NT("T-L"), c6));
         

@@ -5,6 +5,9 @@ import com.udenar.compiladores.Prefija.Gramatica;
 import com.udenar.compiladores.Prefija.NT;
 import com.udenar.compiladores.Prefija.Produccion;
 import java.util.ArrayList;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 /**
  *
@@ -15,6 +18,8 @@ public  class Functions {
  
     private Pila pila;
     private final Gramatica g;
+    ScriptEngineManager mgr = new ScriptEngineManager();
+    ScriptEngine engine = mgr.getEngineByName("JavaScript");
     
     public Functions(Gramatica g ){
         this.g = g;
@@ -58,5 +63,13 @@ public  class Functions {
     public  Pila pop(){
         pila.pop();
         return this.pila;
+    }
+    
+    public String r(String cadena){
+        String resultado = "";
+        try{
+            resultado = engine.eval(cadena.substring(0, cadena.length()-1)).toString();
+            }catch(ScriptException e){e.printStackTrace();}
+        return resultado;
     }
 }
