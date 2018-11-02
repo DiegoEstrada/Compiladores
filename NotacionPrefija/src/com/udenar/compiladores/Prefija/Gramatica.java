@@ -10,7 +10,7 @@ import java.util.Map;
 public class Gramatica {
     
     private String nombre;
-    final private Map<Integer,Produccion> producciones;
+    private Map<Integer,Produccion> producciones;
     
     public Gramatica(String nombre){
         this.nombre = nombre;
@@ -31,11 +31,11 @@ public class Gramatica {
         return true;
     }
     */
-    /*
+    
     public void setProducciones(Map<Integer,Produccion> p){
         this.producciones = p;
     }
-    */
+    
     
     public Produccion getProduccion(Integer i){
         return this.producciones.get(i);

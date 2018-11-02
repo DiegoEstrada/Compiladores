@@ -14,17 +14,22 @@ public  class Functions {
     
  
     private Pila pila;
+    private final Gramatica g;
     
-    public Functions( ){
+    public Functions(Gramatica g ){
+        this.g = g;
         this.pila = new Pila();
         this.pila.push(new Contenido(new NT("VACIA")));
         this.pila.push(new Contenido(new NT("S")));
     }
     
-    public Pila funcion(Produccion p){
+    public Pila funcion(int numeroProduccion){
         
+        
+        Produccion p = this.g.getProduccion(numeroProduccion);
         ArrayList<Contenido> c = p.getContenido();
-        System.out.println("\t Produccion "+" CONTENIDO "+c);
+        System.out.println("Aplicando produccion "+numeroProduccion+
+                " =  "+c);
         /* 
             Revisar que el primer elemento de la produccion no se Terminal
             Y si es terminal, borrarlo para realizar el remplace
@@ -46,6 +51,7 @@ public  class Functions {
     }
    
     public Contenido top(){
+        System.out.println("\t  "+pila);
         return this.pila.top();
     }
     

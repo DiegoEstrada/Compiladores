@@ -2,7 +2,6 @@ package com.udenar.compiladores.Implementacion;
 
 import com.udenar.compiladores.Prefija.Contenido;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -37,9 +36,9 @@ public class Pila {
     
     public void remplace(ArrayList<Contenido> objs){
         this.pila.pop();
-        for(Contenido o : objs){
+        objs.forEach((o) -> {
             this.push(o);
-        }
+        });
         
     }
     public void remplaceInversa(ArrayList<Contenido> objs){
@@ -55,12 +54,12 @@ public class Pila {
         
         //Collections.reverse(objs);
         /*
-            Cuidado con este metodo, lo que hace es modificar todo el contendio 
-            que se le describa aun cunado sea final 
-        */
-        for(Contenido o : copia){
+        Cuidado con este metodo, lo que hace es modificar todo el contendio
+        que se le describa aun cunado sea final
+         */
+        copia.forEach((o) -> {
             this.push(o);
-        }
+        });
     }
 
     /**
