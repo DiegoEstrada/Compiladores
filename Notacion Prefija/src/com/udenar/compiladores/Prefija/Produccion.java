@@ -32,6 +32,9 @@ public class Produccion {
 
     @Override
     public String toString() {
+        
+        
+        
         return "" + nt + " -> " + contenido ;
     }
 

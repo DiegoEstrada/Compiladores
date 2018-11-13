@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class T extends Elemento{
     private final ArrayList<String> CONJUNTO_DE_TERMINALES = new ArrayList();
-    private int atributo;
+    private Integer atributo;
     
     /*
         Defininedo un bloque estatico que inicializa los simbolos terminales 
@@ -44,7 +44,9 @@ public class T extends Elemento{
         
     }
     
-
+    public boolean hasAtributo(){
+        return this.atributo!=null;
+    }
 
     /**
      * @return the atributo

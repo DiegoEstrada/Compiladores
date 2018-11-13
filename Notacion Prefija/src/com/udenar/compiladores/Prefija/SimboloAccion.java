@@ -16,6 +16,10 @@ public  class  SimboloAccion extends Elemento implements Operaciones{
         this.atributos = new HashMap();
     }
    
+    public boolean hasAtributos(){
+        return this.atributos.isEmpty();
+    }
+    
     /**
      * @return the atributos
      */
@@ -41,7 +45,15 @@ public  class  SimboloAccion extends Elemento implements Operaciones{
 
     @Override
     public String toString() {
-        return "{" + super.getNombre()+"}";
+        String attrb = "";
+        if(hasAtributos()){
+            for(Map.Entry<String,Integer> entrada : atributos.entrySet() ){
+                attrb += " Atributo "+entrada.getKey() +" = "+entrada.getValue();
+            }
+            return "{" + super.getNombre()+"}";
+        }
+        else
+            return "{" + super.getNombre()+"}";
     }
     
     

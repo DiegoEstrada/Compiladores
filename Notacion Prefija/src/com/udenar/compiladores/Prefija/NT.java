@@ -34,9 +34,25 @@ public class NT extends Elemento {
             System.out.println("No se pudo modificar el valor del atributo "+nombre);
     }
 
+    public boolean hasAtributos(){
+        return this.atributos.isEmpty();
+    }
+    
     @Override
     public String toString() {
-        return "<" + super.getNombre().toUpperCase()+">";
+        String attrb = "";
+        if(hasAtributos()){
+            for(Map.Entry<String,Integer> entrada : atributos.entrySet() ){
+                attrb += " Atributo "+entrada.getKey() +" = "+entrada.getValue();
+            }
+            return "<" + super.getNombre().toUpperCase()+">";
+        }
+        else
+            return "<" + super.getNombre().toUpperCase()+">";
+        
+        
+        
+        
     }
     
     
