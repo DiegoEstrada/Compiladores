@@ -7,13 +7,16 @@ import java.util.ArrayList;
  * @author Diego EG
  */
 public class T extends Elemento{
-    private final ArrayList<String> CONJUNTO_DE_TERMINALES = new ArrayList();
+    private static final ArrayList<String> CONJUNTO_DE_TERMINALES = Simbolos.getSimbolos();
+    private static final ArrayList<String> CONJUNTO_DE_VARIABLES= Simbolos.getVARIABLES();
+    private static final ArrayList<String> CONJUNTO_DE_NUMEROS= Simbolos.getNUMEROS();
     private Integer atributo;
     
     /*
         Defininedo un bloque estatico que inicializa los simbolos terminales 
         antes de llamar al constructor
     */
+    /*
     {
       this.CONJUNTO_DE_TERMINALES.add(" ");
       this.CONJUNTO_DE_TERMINALES.add("0");
@@ -36,7 +39,19 @@ public class T extends Elemento{
       this.CONJUNTO_DE_TERMINALES.add(")");
       this.CONJUNTO_DE_TERMINALES.add("{");
       this.CONJUNTO_DE_TERMINALES.add("}");
+      this.CONJUNTO_DE_TERMINALES.add("a");
+      this.CONJUNTO_DE_TERMINALES.add("b");
+      this.CONJUNTO_DE_TERMINALES.add("c");
+      this.CONJUNTO_DE_TERMINALES.add("d");
+      this.CONJUNTO_DE_TERMINALES.add("var");
       this.CONJUNTO_DE_TERMINALES.add("main");
+      this.CONJUNTO_DE_TERMINALES.add("$");
+      this.CONJUNTO_DE_TERMINALES.add("ID");
+      this.CONJUNTO_DE_TERMINALES.add("write");
+      this.CONJUNTO_DE_TERMINALES.add("read");
+      this.CONJUNTO_DE_TERMINALES.add("begin");
+      this.CONJUNTO_DE_TERMINALES.add("INTLITERAL");
+      this.CONJUNTO_DE_TERMINALES.add("end");
       this.CONJUNTO_DE_TERMINALES.add("int");
       this.CONJUNTO_DE_TERMINALES.add("boolean");
       this.CONJUNTO_DE_TERMINALES.add("float");
@@ -44,8 +59,10 @@ public class T extends Elemento{
       this.CONJUNTO_DE_TERMINALES.add("else");
       this.CONJUNTO_DE_TERMINALES.add(",");
       this.CONJUNTO_DE_TERMINALES.add(";");
+      this.CONJUNTO_DE_TERMINALES.add("print");
     }
 
+    */
     public T(String nombre) {
         super(nombre);
         if(CONJUNTO_DE_TERMINALES.contains(nombre))
@@ -73,13 +90,33 @@ public class T extends Elemento{
         this.atributo = atributo;
     }
     
+   
+    /**
+     * @return the CONJUNTO_DE_TERMINALES
+     */
+    public static ArrayList<String> getCONJUNTO_DE_TERMINALES() {
+        return CONJUNTO_DE_TERMINALES;
+    }
+    
+    public static ArrayList<String> getCONJUNTO_DE_VARIABLES() {
+        return CONJUNTO_DE_VARIABLES;
+    }
+       
+    
+    /**
+     * @return the CONJUNTO_DE_NUMEROS
+     */
+    public static ArrayList<String> getCONJUNTO_DE_NUMEROS() {
+        return CONJUNTO_DE_NUMEROS;
+    }
 
 
+    
     @Override
     public String toString() {
         return   ""+super.getNombre() ;
     }
-    
+
     
     
 }
