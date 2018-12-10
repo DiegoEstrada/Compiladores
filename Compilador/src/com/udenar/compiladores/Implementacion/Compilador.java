@@ -177,7 +177,7 @@ public class Compilador extends Gramatica {
 
 //      ---------------------------------------------------        
         ArrayList<Contenido> c19 = new ArrayList();      
-        c19.add(new Contenido(new T("INTLITERAL")));        
+        c19.add(new Contenido(new NT("INTLITERAL")));        
         
 
         p.add(new Produccion(new NT("primary"), c19));  

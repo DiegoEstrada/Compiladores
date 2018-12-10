@@ -6,7 +6,6 @@
 package com.udenar.compiladores.Implementacion;
 
 import com.udenar.compiladores.Gramatica.Gramatica;
-import com.udenar.compiladores.Gramatica.Simbolos;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -22,17 +21,15 @@ public class Main {
 
    
     private static StringBuilder marca = new StringBuilder("");
-    private final static String PROGRMA = "begin int a=5; write(l); end $";
+    private final static String PROGRMA = "begin int abc=0; write(abc); end $";
     private static String JS = "";
     private static ArrayList<String> LEXEMAS = new ArrayList();
     private  static ArrayList<String> TERMINALES = T.getCONJUNTO_DE_TERMINALES();
     private static ArrayList<String> VARIABLES = T.getCONJUNTO_DE_VARIABLES();
     private static ArrayList<String> NUMEROS = T.getCONJUNTO_DE_NUMEROS();
-   //DEBE SER ESTE ORDEN PORQUE SINO SE ALYERAN LOS TAMANIOS VER LOS SIZES
     
     
     public static void main(String[] args) throws ScriptException   {
-        // TODO code application logic here
         
         
         Gramatica compilador = new Compilador("compilador");
@@ -40,48 +37,97 @@ public class Main {
         Funciones f = new Funciones(compilador);
         
         int indiceR = 0;
-        //System.out.println("TAM "+TERMINALES.size());
+        String leyendo = "";
+        final char BLANCO = ' ';
+        final char IGUAL = '=';
+        final char PCERRADO = ')';
+        final char PCOMA = ';';
         
         
-        
-        for ( indiceR = 0; indiceR < PROGRMA.length(); indiceR++) {
-            /*
-                Relaizando el reonocimiento de los lexemas con un StringBuilder 
-                y una cadena para ir evaluando lo que se va leyendo 
-            */
-            marca.append(PROGRMA.charAt(indiceR));
-            String ca = new String(marca);
+        for ( indiceR = 0; indiceR < PROGRMA.length();) {
             
-            //Se evalua si lo que se esta leyendo pertenece a los lexemas  && PROGRMA.charAt(indiceR+1) == ' ' 
+            leyendo+=PROGRMA.charAt(indiceR);
+            
             for (String lex : TERMINALES) {
-                if((lex.equals(ca.trim()) ) ){
+                
+                if((lex.equals(leyendo.trim()) ) ){
+                    LEXEMAS.add(leyendo.trim());
                     
-                    
-                   
-                        //System.out.println(" hit "+marca);
-                        if(ca.equals(" ")){
-                            System.out.println("YES");
+                    if(leyendo.trim().equals("int")){
+                        indiceR = indiceR+1;
+                        
+                        String variable = "";
+                        
+                        while(PROGRMA.charAt(indiceR) == BLANCO){
+                            indiceR = indiceR+1;
                         }
-                    LEXEMAS.add(ca.trim());
-                    marca = marca.delete(0, marca.length());
+                        
+                        //System.out.println("COMENZAMOS CON "+PROGRMA.charAt(indiceR));
+                        variable+= PROGRMA.charAt(indiceR);
+                        
+                       if( PROGRMA.charAt(indiceR+1) == IGUAL){
+                           
+                       }else{
+                            indiceR = indiceR+1;
+                            while(PROGRMA.charAt(indiceR) != BLANCO && PROGRMA.charAt(indiceR) != IGUAL){
+                            //System.out.println("SI");
+                            variable+= PROGRMA.charAt(indiceR);
+                            indiceR = indiceR+1;
+                            }
+                       }
+                       
+                        
+                        //System.out.println("TERMINALEMOS CON "+PROGRMA.charAt(indiceR));
+                        indiceR = indiceR - 1;
+                        LEXEMAS.add(variable);
+                        
+                        leyendo="";
+                        
+                    }else if(leyendo.trim().equals("=")){ //IDENRIFICANDO VARIABLES O NUMEROS 
+                        String numeroOvariable = "";
+                        indiceR = indiceR + 1;
+                        //System.out.println("Iniciando con "+PROGRMA.charAt(indiceR));
+                        numeroOvariable+= PROGRMA.charAt(indiceR);
+                        
+                        
+                       
+                        
+                        indiceR = indiceR + 1;
+                        while(PROGRMA.charAt(indiceR) != BLANCO && PROGRMA.charAt(indiceR)!= PCOMA && !TERMINALES.contains(""+PROGRMA.charAt(indiceR))){
+                            numeroOvariable+= PROGRMA.charAt(indiceR);
+                            indiceR = indiceR+1;
+                            
+                        }
+                        //System.out.println("TERMINO con "+PROGRMA.charAt(indiceR));
+                        //System.out.println("NUMERO O VARIANLE "+numeroOvariable);
+                        indiceR = indiceR - 1;
+                        LEXEMAS.add(numeroOvariable);
+                        
+                        leyendo="";
+                        
+                    }else if(leyendo.trim().equals("(")){ // IDENTIFICANDO LOS PARAMETROS DE ( ) LOS PARENTESIS
+                        String id = "";
+                        indiceR = indiceR+1;
+                        System.out.println("Se comienza con "+ PROGRMA.charAt(indiceR));
+                        
+                        while(PROGRMA.charAt(indiceR) != PCERRADO){
+                            
+                            id+= PROGRMA.charAt(indiceR);
+                            indiceR = indiceR + 1;
+                        }
+                        indiceR = indiceR - 1;
+                        System.out.println("IDENTIFICADO "+id);
+                        LEXEMAS.add(id);
+                        
+                        leyendo="";
+                        
+                    }
                     
-                    
-                    
-                    
+                    leyendo = ""; 
                      
                 }
             }
-            /*
-            if(TERMINALES.contains(ca.trim())  && PROGRMA.charAt(indiceR+1)!= ' ' && PROGRMA.charAt(indiceR+1)!= '$'){
-                //De ser asi se imprime y aqui es donde se eimplementa la maquina de pila
-                System.out.println(" hit "+marca);
-                LEXEMAS.add(ca.trim());
-                
-                
-              marca = marca.delete(0, marca.length());
-            }
-            */
-            
+            indiceR++;
         }
         
         //limpiando los espacios de los lexemas
@@ -271,16 +317,11 @@ public class Main {
 
                             if(VARIABLES.contains(lexema)){
                                 f.pop();
-                                System.out.println("HAY LETRA");
-                                    JS+= " "+lexema;
-                                    i++;
-                            }else
-                                if(NUMEROS.contains(lexema)){
-                                    f.pop();
+                                //System.out.println("HAY LETRA");
                                     JS+= " "+lexema;
                                     i++;
                             }
-
+                                //i++;
                         break;
                         
                         
@@ -334,7 +375,7 @@ public class Main {
                             if(NUMEROS.contains(lexema)){
                                 
                                 f.funcion(15);
-                                JS += ""+lexema;
+                                //JS += ""+lexema;
                         }
                         
                         
@@ -363,6 +404,19 @@ public class Main {
                         }
                         break;
                         
+                        case "<INTLITERAL>" :
+                        
+                        System.out.println("\tIdentifica NUM "+lexema);
+                        
+                        if(NUMEROS.contains(lexema)){
+                                f.pop();
+                                //System.out.println("HAY NUMERO");
+                                    JS+= " "+lexema;
+                                    i++;
+                            }
+                        
+                        break;
+                        
                         case "<PRIMARY>" :
                         
                         System.out.println("\tIdentifica "+lexema);
@@ -371,9 +425,9 @@ public class Main {
                             //IDENTOFICACION DE 
                             f.funcion(19);
                         }else if(NUMEROS.contains(lexema)){
-                            f.pop();
+                            f.funcion(20);
                                 
-                                i++;
+                                //i++;
                         }else
                         
                         {
