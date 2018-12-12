@@ -1,0 +1,1 @@
+var  a =  4;var  b =  45;var  c =  a+ b+ 5;print (  c ) ;

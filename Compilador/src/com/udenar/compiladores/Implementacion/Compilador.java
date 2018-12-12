@@ -142,7 +142,7 @@ public class Compilador extends Gramatica {
 //      ---------------------------------------------------     
 
         ArrayList<Contenido> c15 = new ArrayList();
-        c15.add(new Contenido(new NT("add op")));        
+        c15.add(new Contenido(new NT("op")));        
 		c15.add(new Contenido(new NT("primary")));               
 		c15.add(new Contenido(new NT("primary tail")));               
 
@@ -188,7 +188,7 @@ public class Compilador extends Gramatica {
         c20.add(new Contenido(new T("+")));        
         
 
-        p.add(new Produccion(new NT("add op"), c20)); 
+        p.add(new Produccion(new NT("op"), c20)); 
 
 //      ---------------------------------------------------        
 
@@ -196,16 +196,32 @@ public class Compilador extends Gramatica {
         c21.add(new Contenido(new T("-")));        
         
 
-        p.add(new Produccion(new NT("add op"), c21));
+        p.add(new Produccion(new NT("op"), c21));
 
-//      ---------------------------------------------------        
+//      ---------------------------------------------------  
 
         ArrayList<Contenido> c22 = new ArrayList();      
-        c22.add(new Contenido(new NT("PROGRAM")));
-        c22.add(new Contenido(new T("$")));                			//fin de cadena
+        c22.add(new Contenido(new T("*")));        
         
 
-        p.add(new Produccion(new NT("INICIO"), c22)); 
+        p.add(new Produccion(new NT("op"), c22));
+
+//      ---------------------------------------------------  
+
+        ArrayList<Contenido> c23 = new ArrayList();      
+        c23.add(new Contenido(new T("/")));        
+        
+
+        p.add(new Produccion(new NT("op"), c23));
+
+//      ---------------------------------------------------  
+
+        ArrayList<Contenido> c24 = new ArrayList();      
+        c24.add(new Contenido(new NT("PROGRAM")));
+        c24.add(new Contenido(new T("$")));                			//fin de cadena
+        
+
+        p.add(new Produccion(new NT("INICIO"), c24)); 
 
 
         // Creando y Agregando las producciones a la gramatica 

@@ -6,34 +6,29 @@
 package com.udenar.compiladores.Implementacion;
 
 import com.udenar.compiladores.Gramatica.Gramatica;
+import com.udenar.compiladores.Gramatica.T;
+import java.util.ArrayList;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import com.udenar.compiladores.Gramatica.T;
-import java.util.ArrayList;
-
 
 /**
  *
  * @author Diego EG
  */
-public class Main {
-
+public class MainParametros {
    
-
-
-  private final static Traduccion objeto= new Traduccion();
-    //private final static String PROGRMA= objeto.getFuente("entrada.udenar");    
-    private final static String PROGRMA = "begin int a=4; int b=45; int c =a+b+5; write(c);   end $";
-    private static String JS = "";
-    private static ArrayList<String> LEXEMAS = new ArrayList();
-    private  static ArrayList<String> TERMINALES = T.getCONJUNTO_DE_TERMINALES();
-    private static ArrayList<String> VARIABLES = T.getCONJUNTO_DE_VARIABLES();
-    private static ArrayList<String> NUMEROS = T.getCONJUNTO_DE_NUMEROS();
-    
     
     public static void main(String[] args) throws ScriptException   {
         
+
+        Traduccion objeto= new Traduccion();
+        String PROGRMA= objeto.getFuente(args[0]);
+        String JS = "";
+        ArrayList<String> LEXEMAS = new ArrayList();
+        ArrayList<String> TERMINALES = T.getCONJUNTO_DE_TERMINALES();
+        ArrayList<String> VARIABLES = T.getCONJUNTO_DE_VARIABLES();
+        ArrayList<String> NUMEROS = T.getCONJUNTO_DE_NUMEROS();
         
         Gramatica compilador = new Compilador("compilador");
         System.out.println("Producciones "+compilador);
@@ -628,7 +623,7 @@ public class Main {
                         
                         
                         case ";" :
-                            
+                        
                         System.out.println("\tIdentifica "+lexema);
                         
                         switch(lexema){
@@ -719,5 +714,6 @@ public class Main {
         
     }
    
-  
+
+
 }

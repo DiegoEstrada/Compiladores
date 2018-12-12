@@ -5,9 +5,12 @@
         <group>
             <file>file:/C:/Users/Diego%20EG/Documents/Escuela/Escuela%20Superior%20de%20Cómputo/Diseño%20de%20Compiladores/Compilador/src/com/udenar/compiladores/Gramatica/T.java</file>
             <file>file:/C:/Users/Diego%20EG/Documents/Escuela/Escuela%20Superior%20de%20Cómputo/Diseño%20de%20Compiladores/Compilador/src/com/udenar/compiladores/Implementacion/Main.java</file>
+            <file>file:/C:/Users/Diego%20EG/Documents/Escuela/Escuela%20Superior%20de%20Cómputo/Diseño%20de%20Compiladores/Compilador/src/com/udenar/compiladores/Implementacion/MainParametros.java</file>
             <file>file:/C:/Users/Diego%20EG/Documents/Escuela/Escuela%20Superior%20de%20Cómputo/Diseño%20de%20Compiladores/Compilador/src/com/udenar/compiladores/Implementacion/Compilador.java</file>
             <file>file:/C:/Users/Diego%20EG/Documents/Escuela/Escuela%20Superior%20de%20Cómputo/Diseño%20de%20Compiladores/Compilador/src/com/udenar/compiladores/Implementacion/Funciones.java</file>
+            <file>file:/C:/Users/Diego%20EG/Documents/Escuela/Escuela%20Superior%20de%20Cómputo/Diseño%20de%20Compiladores/Compilador/src/com/udenar/compiladores/Implementacion/Traduccion.java</file>
             <file>file:/C:/Users/Diego%20EG/Documents/Escuela/Escuela%20Superior%20de%20Cómputo/Diseño%20de%20Compiladores/Compilador/src/com/udenar/compiladores/Gramatica/Simbolos.java</file>
+            <file>file:/C:/Users/Diego%20EG/Documents/Escuela/Escuela%20Superior%20de%20Cómputo/Diseño%20de%20Compiladores/Compilador/src/com/udenar/compiladores/Implementacion/Pila.java</file>
         </group>
     </open-files>
 </project-private>
